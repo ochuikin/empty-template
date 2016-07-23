@@ -150,6 +150,7 @@ public class WordFetcher {
             float learning_rate = c.getFloat(4);
             w.setWord(word_from);
             w.setTranslate(word_to);
+            Log.i("TEST", w.toString());
             res.add(w);
         }
         c.close();

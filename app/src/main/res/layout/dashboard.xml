@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/banner_img" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/banner"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/banner_text_top_margin"
+                    android:text="@string/choose_study_way" />
+
+                <Button
+                    android:id="@+id/fast_trening_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/banner"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/general_padding"
+                    android:background="@drawable/general_button"
+                    android:text="@string/fast_trening" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/find_pair_menu_item"
+                style="@style/menu_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/words_matching" />
+
+            <Button
+                android:id="@+id/fast_trening_2_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/general_padding"
+                android:background="@drawable/general_button"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/fast_trening" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -12,6 +12,7 @@ import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ru.yandex.yamblz.App;
+import ru.yandex.yamblz.ui.activities.MainActivity;
 
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class BaseFragment extends Fragment {
@@ -60,5 +61,13 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroy() {
         App.get(getContext()).applicationComponent().leakCanaryProxy().watch(this);
         super.onDestroy();
+    }
+
+    protected View findViewById(int id) {
+        MainActivity ma = (MainActivity) getActivity();
+        if (ma == null) {
+            return null;
+        }
+        return ma.findViewById(id);
     }
 }

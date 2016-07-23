@@ -1,4 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Yamblz</string>
-    <string name="content">Hello</string>
+    <string name="app_name">SelfEnglishTutor</string>
+    <string name="fast_trening">FAST TRENING</string>
+    <string name="choose_study_way">choose study way</string>
+    <string name="words_matching">words_matching</string>
+    <string name="study_way">study way</string>
 </resources>

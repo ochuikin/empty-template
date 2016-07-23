@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/content"
+        android:text="@string/fast_trening"
         android:textSize="42sp"
         android:gravity="center"
         />

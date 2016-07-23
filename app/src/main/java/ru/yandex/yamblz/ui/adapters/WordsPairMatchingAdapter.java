@@ -26,6 +26,8 @@ public class WordsPairMatchingAdapter extends PairMatchingBaseAdapter{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTextView.setText(words.get(position).getWord());
+
+        holder.mTextView.setBackgroundColor(ContextCompat.getColor(fragment.getActivity(), R.color.white));
     }
 
     @Override

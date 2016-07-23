@@ -23,7 +23,6 @@ public class TranslationsPairMatchingAdapter extends PairMatchingBaseAdapter {
 
     @Override
     protected void handleClick(int pos, PairMatchingBaseAdapter.ViewHolder vh) {
-        vh.mTextView.setBackgroundColor(ContextCompat.getColor(fragment.getActivity(), R.color.light_gray));
 
         fragment.chooseTranslation(vh);
     }
@@ -32,5 +31,6 @@ public class TranslationsPairMatchingAdapter extends PairMatchingBaseAdapter {
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTextView.setText(words.get(position).getTranslate());
 
+        holder.mTextView.setBackgroundColor(ContextCompat.getColor(fragment.getActivity(), R.color.white));
     }
 }

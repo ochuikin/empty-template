@@ -63,8 +63,6 @@ public abstract class PairMatchingBaseAdapter extends RecyclerView.Adapter<PairM
             }
         });
 
-        vh.mTextView.setBackgroundColor(ContextCompat.getColor(fragment.getActivity(), R.color.white));
-
 
         return vh;
     }

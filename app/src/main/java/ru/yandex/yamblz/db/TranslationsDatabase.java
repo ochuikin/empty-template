@@ -183,7 +183,7 @@ public class TranslationsDatabase extends SQLiteOpenHelper {
             value.put(Translations.COLUMN_WORD_FROM, word.getWord());
             value.put(Translations.COLUMN_WORD_TO, word.getTranslate());
             value.put(Translations.COLUMN_LANGUAGE_DIRECTION, getLanguageDirection(word.getLanguage_word(), word.getLanguage_translation()));
-            long _id = db.insert(Translations.TABLE_NAME, null, value);
+            long _id = db.insertWithOnConflict(Translations.TABLE_NAME, null, value, SQLiteDatabase.CONFLICT_REPLACE);
         }
 
     }

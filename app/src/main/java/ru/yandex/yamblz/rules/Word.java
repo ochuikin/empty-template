@@ -27,11 +27,12 @@ public class Word implements Serializable{
         this.grade = grade;
     }
 
-    public Word(String word, Language language) {
+    public Word(String word, Language language_from, Language language_to) {
         this.id = 0;
         this.word = word;
         this.translate = null;
-        this.language = language;
+        this.language_word = language_from;
+        this.language_translation = language_to;
         this.grade = 0;
     }
 
@@ -81,5 +82,17 @@ public class Word implements Serializable{
 
     public void setGrade(double grade) {
         this.grade = grade;
+    }
+
+    @Override
+    public String toString() {
+        return "Word{" +
+                "id=" + id +
+                ", word='" + word + '\'' +
+                ", translate='" + translate + '\'' +
+                ", language_word=" + language_word +
+                ", language_translation=" + language_translation +
+                ", grade=" + grade +
+                '}';
     }
 }

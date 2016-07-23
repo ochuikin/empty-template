@@ -176,20 +176,21 @@ public class TranslationsDatabase extends SQLiteOpenHelper {
 
     public void insertNewWords(List<Word> words) {
         SQLiteDatabase db = getWritableDatabase();
-        db.beginTransaction();
-        try {
-            for (Word word: words) {
-                // if we already have the artist with the same name, we ovewrite this entry
-                ContentValues value = new ContentValues();
-                value.put(Translations.COLUMN_WORD_FROM, word.getWord());
-                value.put(Translations.COLUMN_WORD_TO, word.getTranslate());
-                //value.put(Translations.COLUMN_LANGUAGE_DIRECTION, getLanguageDirection(word.getLanguage(), word.getTranslate()));
-                long _id = db.insert(Translations.TABLE_NAME, null, value);
 
-            }
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
+        for (Word word: words) {
+            // if we already have the artist with the same name, we ovewrite this entry
+            ContentValues value = new ContentValues();
+            value.put(Translations.COLUMN_WORD_FROM, word.getWord());
+            value.put(Translations.COLUMN_WORD_TO, word.getTranslate());
+            value.put(Translations.COLUMN_LANGUAGE_DIRECTION, getLanguageDirection(word.getLanguage_word(), word.getLanguage_translation()));
+            long _id = db.insert(Translations.TABLE_NAME, null, value);
         }
+
+    }
+
+    public Cursor getWords() {
+        String query_str = "select * from " + Translations.TABLE_NAME + ";";
+        Cursor res = getReadableDatabase().rawQuery(query_str, null);
+        return res;
     }
 }

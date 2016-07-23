@@ -36,8 +36,11 @@ public class DashboardFragment extends BaseFragment {
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i("TEST", Integer.toString(App.get(getContext()).getTranslationsDb().getLanguageDirection(Language.EN, Language.RU)));
-        Log.i("TEST", Integer.toString(App.get(getContext()).getTranslationsDb().getLanguageDirection(Language.RU, Language.EN)));
+        WordFetcher.loadDataToDatabase(getContext());
+        List<Word> wordlist = WordFetcher.getWords(getContext());
+        for (Word word : wordlist) {
+            Log.i("TESTWORD", word.toString());
+        }
         return inflater.inflate(R.layout.dashboard, container, false);
     }
 

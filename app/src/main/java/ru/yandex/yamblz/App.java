@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import ru.yandex.yamblz.db.TranslationsDatabase;
+import ru.yandex.yamblz.db.WordFetcher;
 import ru.yandex.yamblz.developer_settings.DevMetricsProxy;
 import ru.yandex.yamblz.developer_settings.DeveloperSettingsModel;
 import timber.log.Timber;
@@ -44,6 +45,7 @@ public class App extends Application {
         }
 
         translationsDb = new TranslationsDatabase(this.getApplicationContext());
+        WordFetcher.loadDataToDatabase(getApplicationContext());
     }
 
     @NonNull

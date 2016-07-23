@@ -17,18 +17,16 @@ public class WordFetcher {
             InputStream istream = context.getApplicationContext().getAssets().open("words.json");
             JsonReader reader = new JsonReader(new InputStreamReader(istream));
             reader.beginObject();
-            Log.i("TEST", reader.nextName());//en
+            reader.nextName();
             reader.beginArray();
             while (reader.hasNext()) {
                 String en_word = reader.nextString();
-                Log.i("TESTWORD", en_word);
             }
             reader.endArray();
-            Log.i("TEST", reader.nextName());//ru
+            reader.nextName();
             reader.beginArray();
             while (reader.hasNext()) {
                 String en_word = reader.nextString();
-                Log.i("TESTWORD", en_word);
             }
             reader.endArray();
             reader.endObject();

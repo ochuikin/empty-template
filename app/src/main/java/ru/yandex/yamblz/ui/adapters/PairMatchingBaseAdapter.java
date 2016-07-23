@@ -1,6 +1,7 @@
 package ru.yandex.yamblz.ui.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,14 +28,16 @@ public abstract class PairMatchingBaseAdapter extends RecyclerView.Adapter<PairM
     public PairMatchingBaseAdapter(List<Word> words, FindPairFragment fragment) {
 
         this.words = new ArrayList<>(words);
-//        Collections.copy(this.words, words);
         Collections.shuffle(this.words);
         this.fragment = fragment;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public Word word;
+
         public TextView mTextView;
+
         public ViewHolder(View v) {
             super(v);
             mTextView = (TextView) v.findViewById(R.id.word_item);
@@ -52,11 +55,16 @@ public abstract class PairMatchingBaseAdapter extends RecyclerView.Adapter<PairM
             @Override
             public void onClick(View v) {
                 int adapterPosition = vh.getAdapterPosition();
-                if (adapterPosition != RecyclerView.NO_POSITION){
+                vh.word = words.get(adapterPosition);
+
+                if (adapterPosition != RecyclerView.NO_POSITION) {
                     handleClick(adapterPosition, vh);
                 }
             }
         });
+
+        vh.mTextView.setBackgroundColor(ContextCompat.getColor(fragment.getActivity(), R.color.white));
+
 
         return vh;
     }
@@ -68,10 +76,10 @@ public abstract class PairMatchingBaseAdapter extends RecyclerView.Adapter<PairM
 
     protected abstract void handleClick(int pos, PairMatchingBaseAdapter.ViewHolder vh);
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         int pos = -1;
         for (Word word : words) {
-            if (word.getId() == id){
+            if (word.getId() == id) {
                 pos = words.indexOf(word);
             }
         }

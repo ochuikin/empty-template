@@ -3,19 +3,17 @@ package ru.yandex.yamblz.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.SeekBar;
-
-import java.util.List;
 
 import ru.yandex.yamblz.R;
 import ru.yandex.yamblz.rules.FindPairRules;
-import ru.yandex.yamblz.rules.Word;
+import ru.yandex.yamblz.ui.adapters.PairMatchingBaseAdapter;
 import ru.yandex.yamblz.ui.adapters.TranslationsPairMatchingAdapter;
 import ru.yandex.yamblz.ui.adapters.WordsPairMatchingAdapter;
 
@@ -64,47 +62,87 @@ public class FindPairFragment extends BaseFragment {
         seekBar.setMax(rules.getWords().size());
     }
 
-    public static FindPairFragment create(FindPairRules rules){
+    public static FindPairFragment create(FindPairRules rules) {
         FindPairFragment fragment = new FindPairFragment();
         fragment.rules = rules;
         return fragment;
     }
 
-    private class ComparingState{
+    private class ComparingState {
 
-        private final int NOT_CHOOSED = -1;
+        private PairMatchingBaseAdapter.ViewHolder wordVh = null;
+        private PairMatchingBaseAdapter.ViewHolder translateVh = null;
 
-        private int idWord = NOT_CHOOSED;
-        private int idTranslate = NOT_CHOOSED;
-
-        public void chooseWord(int id){
-            idWord = id;
+        public void chooseWord(PairMatchingBaseAdapter.ViewHolder vh) {
+            if (wordVh == null) {
+                wordVh = vh;
+                vh.mTextView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.light_gray));
+            }
             checkToDelete();
         }
 
-        public void chooseTranslation(int id){
-            idTranslate = id;
+        public void chooseTranslation(PairMatchingBaseAdapter.ViewHolder vh) {
+            if (translateVh == null) {
+                translateVh = vh;
+                vh.mTextView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.light_gray));
+            }
             checkToDelete();
         }
 
-        private void checkToDelete(){
-            if (idWord != NOT_CHOOSED && idTranslate != NOT_CHOOSED){
-                if (idWord == idTranslate){
-                    translationsAdapter.deleteById(idTranslate);
-                    wordsAdapter.deleteById(idWord);
+        private void checkToDelete() {
+            if (wordVh != null && translateVh != null) {
+                if (wordVh.word.getId() == translateVh.word.getId()) {
+                    wordVh.mTextView.setBackgroundColor(ContextCompat.getColor(
+                            getActivity(), R.color.green_background_button_color));
+                    translateVh.mTextView.setBackgroundColor(ContextCompat.getColor(
+                            getActivity(), R.color.green_background_button_color));
+
+                    translationsAdapter.deleteById(translateVh.word.getId());
+                    wordsAdapter.deleteById(wordVh.word.getId());
+                } else {
+                    wordVh.mTextView.setBackgroundColor(ContextCompat.getColor(
+                            getActivity(), R.color.red_background_button_color));
+                    translateVh.mTextView.setBackgroundColor(ContextCompat.getColor(
+                            getActivity(), R.color.red_background_button_color));
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                //Never! I repeat, never remind me about it!!! Any one who
+                                //will read it!!! Never remind me about it, please!
+                                //I hope vodka make me to forget it(
+                                Thread.sleep(100, 0);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            runOnUiThreadIfFragmentAlive(new Runnable() {
+                                @Override
+                                public void run() {
+                                    wordVh.mTextView.setBackgroundColor(ContextCompat.getColor(
+                                            getActivity(), R.color.white));
+                                    translateVh.mTextView.setBackgroundColor(ContextCompat.getColor(
+                                            getActivity(), R.color.white));
+                                }
+                            });
+
+                        }
+                    }).start();
+
                 }
                 state = new ComparingState();
+                return;
             }
         }
 
     }
 
-    public void chooseWord(int id){
-        state.chooseWord(id);
+    public void chooseWord(PairMatchingBaseAdapter.ViewHolder vh) {
+        state.chooseWord(vh);
     }
 
-    public void chooseTranslation(int id){
-        state.chooseTranslation(id);
+    public void chooseTranslation(PairMatchingBaseAdapter.ViewHolder vh) {
+        state.chooseTranslation(vh);
     }
 
 }

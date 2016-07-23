@@ -53,6 +53,7 @@ public class WordFetcher {
         Cursor c = db.getWords();
         while (c.moveToNext()) {
             Word w = new Word();
+            w.setId(c.getInt(0));
             int language_direction = c.getInt(1);
             switch (language_direction) {
                 case 1:

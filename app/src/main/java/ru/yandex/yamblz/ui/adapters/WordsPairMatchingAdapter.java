@@ -30,8 +30,7 @@ public class WordsPairMatchingAdapter extends PairMatchingBaseAdapter{
 
     @Override
     protected void handleClick(int pos, ViewHolder vh) {
-        vh.mTextView.setBackgroundColor(ContextCompat.getColor(fragment.getActivity(), R.color.light_gray));
 
-        fragment.chooseWord(words.get(pos).getId());
+        fragment.chooseWord(vh);
     }
 }

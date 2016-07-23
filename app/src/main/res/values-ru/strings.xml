@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Самоанглоучитель</string>
+    <string name="fast_trening">БЫСТРАЯ ТРЕНИРОВКА</string>
+    <string name="choose_study_way">Выберите режим обучения</string>
+    <string name="words_matching">ПОИСК ПАРЫ</string>
+    <string name="study_way">Режим обучения</string>
+    <string name="make_matching">УСТАНОВИТЕ СООТВЕТСТВИЕ</string>
+</resources>

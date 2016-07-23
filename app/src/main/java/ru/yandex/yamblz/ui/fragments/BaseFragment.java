@@ -71,5 +71,20 @@ public abstract class BaseFragment extends Fragment {
         return ma.findViewById(id);
     }
 
+    public void applyFragment(BaseFragment baseFragment) {
+        MainActivity ma = (MainActivity) getActivity();
+        if (ma == null) {
+            return;
+        }
+        ma.applyFragment(baseFragment);
+    }
+
+    protected void finish() {
+        MainActivity ma = (MainActivity) getActivity();
+        if (ma == null) {
+            return;
+        }
+        ma.finishFragment();
+    }
 
 }

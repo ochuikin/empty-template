@@ -3,6 +3,7 @@ package ru.yandex.yamblz.ui.activities;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,6 +13,7 @@ import javax.inject.Named;
 import ru.yandex.yamblz.App;
 import ru.yandex.yamblz.R;
 import ru.yandex.yamblz.developer_settings.DeveloperSettingsModule;
+import ru.yandex.yamblz.ui.fragments.BaseFragment;
 import ru.yandex.yamblz.ui.fragments.DashboardFragment;
 import ru.yandex.yamblz.ui.other.ViewModifier;
 
@@ -68,5 +70,20 @@ public class MainActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    public void applyFragment(BaseFragment baseFragment) {
+        if (findViewById(R.id.main_frame_layout) == null) {
+            return;
+        }
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_frame_layout, baseFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void finishFragment() {
+        getSupportFragmentManager().popBackStack();
     }
 }

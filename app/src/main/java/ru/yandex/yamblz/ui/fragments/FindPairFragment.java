@@ -41,6 +41,8 @@ public class FindPairFragment extends BaseFragment {
         wordsListView.setLayoutManager(mLayoutManager);
 
         translationListView = (RecyclerView) findViewById(R.id.translations_list_view);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        translationListView.setLayoutManager(mLayoutManager);
 
     }
 

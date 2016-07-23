@@ -43,13 +43,13 @@ public class DashboardFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 List<Word> words = new ArrayList<>();
-                words.add(new Word(1, "1", "qwe1", Language.RU, 0.4));
-                words.add(new Word(2, "2", "qwe2", Language.RU, 0.4));
-                words.add(new Word(3, "3", "qwe3", Language.RU, 0.4));
-                words.add(new Word(4, "4", "qwe4", Language.RU, 0.4));
-                words.add(new Word(5, "5", "qwe5", Language.RU, 0.4));
-                words.add(new Word(6, "6", "qwe6", Language.RU, 0.4));
-                words.add(new Word(7, "7", "qwe7", Language.RU, 0.4));
+                words.add(new Word(1, "1", "qwe1", Language.RU, Language.EN, 0.4));
+                words.add(new Word(2, "2", "qwe2", Language.RU, Language.EN, 0.4));
+                words.add(new Word(3, "3", "qwe3", Language.RU, Language.EN, 0.4));
+                words.add(new Word(4, "4", "qwe4", Language.RU, Language.EN, 0.4));
+                words.add(new Word(5, "5", "qwe5", Language.RU, Language.EN, 0.4));
+                words.add(new Word(6, "6", "qwe6", Language.RU, Language.EN, 0.4));
+                words.add(new Word(7, "7", "qwe7", Language.RU, Language.EN, 0.4));
 
                 applyFragment(FindPairFragment.create(words));
             }

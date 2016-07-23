@@ -28,9 +28,13 @@ public class FindPairFragment extends BaseFragment {
     private FindPairRules rules;
 
     private RecyclerView wordsListView;
+    private WordsPairMatchingAdapter wordsAdapter;
     private RecyclerView translationListView;
+    private TranslationsPairMatchingAdapter translationsAdapter;
 
     private SeekBar seekBar;
+
+    private ComparingState state = new ComparingState();
 
     @NonNull
     @Override
@@ -45,14 +49,14 @@ public class FindPairFragment extends BaseFragment {
         wordsListView = (RecyclerView) findViewById(R.id.words_list_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         wordsListView.setLayoutManager(mLayoutManager);
-        WordsPairMatchingAdapter wordsAdapter = new WordsPairMatchingAdapter(rules.getWords());
+        wordsAdapter = new WordsPairMatchingAdapter(rules.getWords(), this);
         wordsListView.setAdapter(wordsAdapter);
 
         translationListView = (RecyclerView) findViewById(R.id.translations_list_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         translationListView.setLayoutManager(mLayoutManager);
-        TranslationsPairMatchingAdapter translationAdapter = new TranslationsPairMatchingAdapter(rules.getWords());
-        translationListView.setAdapter(translationAdapter);
+        translationsAdapter = new TranslationsPairMatchingAdapter(rules.getWords(), this);
+        translationListView.setAdapter(translationsAdapter);
 
         seekBar = (SeekBar) findViewById(R.id.pair_matchin_seek_bar);
         seekBar.getThumb().mutate().setAlpha(0);
@@ -66,6 +70,41 @@ public class FindPairFragment extends BaseFragment {
         return fragment;
     }
 
+    private class ComparingState{
 
+        private final int NOT_CHOOSED = -1;
+
+        private int idWord = NOT_CHOOSED;
+        private int idTranslate = NOT_CHOOSED;
+
+        public void chooseWord(int id){
+            idWord = id;
+            checkToDelete();
+        }
+
+        public void chooseTranslation(int id){
+            idTranslate = id;
+            checkToDelete();
+        }
+
+        private void checkToDelete(){
+            if (idWord != NOT_CHOOSED && idTranslate != NOT_CHOOSED){
+                if (idWord == idTranslate){
+                    translationsAdapter.deleteById(idTranslate);
+                    wordsAdapter.deleteById(idWord);
+                }
+                state = new ComparingState();
+            }
+        }
+
+    }
+
+    public void chooseWord(int id){
+        state.chooseWord(id);
+    }
+
+    public void chooseTranslation(int id){
+        state.chooseTranslation(id);
+    }
 
 }

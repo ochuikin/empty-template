@@ -34,6 +34,8 @@ import ru.yandex.yamblz.rules.Language;
  * Created by olegchuikin on 23/07/16.
  */
 
+//trnsl.1.1.20160723T152555Z.6f14115a51faf0d9.89fa941178af86ce95048f2f1241e1231cccdb47
+
 public class DashboardFragment extends BaseFragment {
 
     private Button findPairTrening;

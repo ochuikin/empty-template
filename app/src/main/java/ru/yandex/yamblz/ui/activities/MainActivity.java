@@ -3,10 +3,8 @@ package ru.yandex.yamblz.ui.activities;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,8 +12,7 @@ import javax.inject.Named;
 import ru.yandex.yamblz.App;
 import ru.yandex.yamblz.R;
 import ru.yandex.yamblz.developer_settings.DeveloperSettingsModule;
-import ru.yandex.yamblz.ui.fragments.ContentFragment;
-import ru.yandex.yamblz.ui.fragments.Dashboard;
+import ru.yandex.yamblz.ui.fragments.DashboardFragment;
 import ru.yandex.yamblz.ui.other.ViewModifier;
 
 public class MainActivity extends BaseActivity {
@@ -34,7 +31,7 @@ public class MainActivity extends BaseActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_frame_layout, new Dashboard())
+                    .replace(R.id.main_frame_layout, new DashboardFragment())
                     .commit();
         }
 

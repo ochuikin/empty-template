@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import ru.yandex.yamblz.R;
@@ -15,8 +16,9 @@ import ru.yandex.yamblz.R;
  * Created by olegchuikin on 23/07/16.
  */
 
-public class Dashboard extends BaseFragment {
+public class DashboardFragment extends BaseFragment {
 
+    private Button findPairTrening;
 
 
     @NonNull
@@ -29,6 +31,13 @@ public class Dashboard extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        findPairTrening = (Button) findViewById(R.id.find_pair_menu_item);
+        findPairTrening.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

@@ -18,7 +18,7 @@ import ru.yandex.yamblz.ui.activities.MainActivity;
 public abstract class BaseFragment extends Fragment {
 
     private Handler mainThreadHandler;
-    private Unbinder viewBinder;
+    protected Unbinder viewBinder;
 
     @Override
     public void onAttach(Context context) {
@@ -70,4 +70,6 @@ public abstract class BaseFragment extends Fragment {
         }
         return ma.findViewById(id);
     }
+
+
 }

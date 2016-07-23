@@ -2,12 +2,17 @@ package ru.yandex.yamblz;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
+import java.util.List;
 
 import ru.yandex.yamblz.db.TranslationsDatabase;
 import ru.yandex.yamblz.db.WordFetcher;
 import ru.yandex.yamblz.developer_settings.DevMetricsProxy;
 import ru.yandex.yamblz.developer_settings.DeveloperSettingsModel;
+import ru.yandex.yamblz.rules.Word;
 import timber.log.Timber;
 
 public class App extends Application {
@@ -45,6 +50,7 @@ public class App extends Application {
         }
 
         translationsDb = new TranslationsDatabase(this.getApplicationContext());
+
         WordFetcher.loadDataToDatabase(getApplicationContext());
     }
 

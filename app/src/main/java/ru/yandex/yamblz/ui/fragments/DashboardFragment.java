@@ -3,6 +3,7 @@ package ru.yandex.yamblz.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+
 import java.util.ArrayList;
 import java.util.List;
+
+
+import ru.yandex.yamblz.App;
 
 import ru.yandex.yamblz.R;
 import ru.yandex.yamblz.rules.FindPairRulesImpl;
 import ru.yandex.yamblz.rules.Language;
 import ru.yandex.yamblz.rules.Word;
 import ru.yandex.yamblz.db.WordFetcher;
+import ru.yandex.yamblz.rules.Language;
 
 /**
  * Created by olegchuikin on 23/07/16.
@@ -32,6 +38,10 @@ public class DashboardFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         WordFetcher.loadDataToDatabase(getContext());
+        List<Word> wordlist = WordFetcher.getWords(getContext());
+        for (Word word : wordlist) {
+            Log.i("TESTWORD", word.toString());
+        }
         return inflater.inflate(R.layout.dashboard, container, false);
     }
 

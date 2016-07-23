@@ -5,7 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.provider.BaseColumns;
+import android.util.Log;
+
+import java.util.List;
+
+import ru.yandex.yamblz.rules.Language;
+import ru.yandex.yamblz.rules.Word;
 
 
 /**
@@ -34,7 +41,7 @@ public class TranslationsDatabase extends SQLiteOpenHelper {
     private static final String SQL_CREATE_TRANSLATIONS = "CREATE TABLE " + Translations.TABLE_NAME + " (" +
             Translations._ID + " INTEGER PRIMARY KEY," +
             Translations.COLUMN_LANGUAGE_DIRECTION + TYPE_INTEGER + COMMA_SEP + //foreign key to LanguageDirections.id
-            Translations.COLUMN_WORD_FROM + TYPE_TEXT + COMMA_SEP +
+            Translations.COLUMN_WORD_FROM + TYPE_TEXT + UNIQUE_KEY + COMMA_SEP +
             Translations.COLUMN_WORD_TO + TYPE_INTEGER + COMMA_SEP +
             Translations.COLUMN_LEARNING_RATE + TYPE_REAL + COMMA_SEP +
             "FOREIGN KEY (" + Translations.COLUMN_LANGUAGE_DIRECTION + ") REFERENCES " + LanguageDirections.TABLE_NAME + "(" + LanguageDirections._ID + ")" + ")";
@@ -94,9 +101,6 @@ public class TranslationsDatabase extends SQLiteOpenHelper {
     public static class Languages implements BaseColumns {
         public static final String TABLE_NAME = "languages";
         public static final String COLUMN_LANGUAGE_NAME = "language_name";
-
-        public static final String LANGUAGE_EN = "en";
-        public static final String LANGUAGE_RU = "ru";
     }
 
     private static final String SQL_CREATE_LANGUAGES = "CREATE TABLE " + Languages.TABLE_NAME + " (" +
@@ -124,8 +128,8 @@ public class TranslationsDatabase extends SQLiteOpenHelper {
         ContentValues [] values = new ContentValues[2];
         values[0] = new ContentValues();
         values[1] = new ContentValues();
-        values[0].put(Languages.COLUMN_LANGUAGE_NAME, Languages.LANGUAGE_EN);
-        values[1].put(Languages.COLUMN_LANGUAGE_NAME, Languages.LANGUAGE_RU);
+        values[0].put(Languages.COLUMN_LANGUAGE_NAME, Language.RU.toString());
+        values[1].put(Languages.COLUMN_LANGUAGE_NAME, Language.EN.toString());
         db.insert(Languages.TABLE_NAME, null, values[0]);
         db.insert(Languages.TABLE_NAME, null, values[1]);
 
@@ -134,7 +138,9 @@ public class TranslationsDatabase extends SQLiteOpenHelper {
         directions[0] = new ContentValues();
         directions[1] = new ContentValues();
         directions[0].put(LanguageDirections.COLUMN_LANGUAGE_FROM, 1);
-        directions[1].put(LanguageDirections.COLUMN_LANGUAGE_TO, 2);
+        directions[0].put(LanguageDirections.COLUMN_LANGUAGE_TO, 2);
+        directions[1].put(LanguageDirections.COLUMN_LANGUAGE_FROM, 2);
+        directions[1].put(LanguageDirections.COLUMN_LANGUAGE_TO, 1);
         db.insert(LanguageDirections.TABLE_NAME, null, directions[0]);
         db.insert(LanguageDirections.TABLE_NAME, null, directions[1]);
     }
@@ -152,5 +158,39 @@ public class TranslationsDatabase extends SQLiteOpenHelper {
 
     public Cursor getAllLanguages() {
         return getReadableDatabase().rawQuery("select * from Languages;", null);
+    }
+
+
+    public int getLanguageDirection(Language from, Language to) {
+        String query_str = "select " + LanguageDirections._ID + " from " + LanguageDirections.TABLE_NAME + " where " +
+                LanguageDirections.COLUMN_LANGUAGE_FROM + " = " + Integer.toString(from.lang_id) + " and " +
+                LanguageDirections.COLUMN_LANGUAGE_TO + " = " + Integer.toString(to.lang_id) + ";";
+
+        Log.i("TEST", query_str);
+        Cursor res = getReadableDatabase().rawQuery(query_str, null);
+        res.moveToNext();
+        int result = res.getInt(0);
+        res.close();
+        return result;
+    }
+
+    public void insertNewWords(List<Word> words) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        for (Word word: words) {
+            // if we already have the artist with the same name, we ovewrite this entry
+            ContentValues value = new ContentValues();
+            value.put(Translations.COLUMN_WORD_FROM, word.getWord());
+            value.put(Translations.COLUMN_WORD_TO, word.getTranslate());
+            value.put(Translations.COLUMN_LANGUAGE_DIRECTION, getLanguageDirection(word.getLanguage_word(), word.getLanguage_translation()));
+            long _id = db.insert(Translations.TABLE_NAME, null, value);
+        }
+
+    }
+
+    public Cursor getWords() {
+        String query_str = "select * from " + Translations.TABLE_NAME + ";";
+        Cursor res = getReadableDatabase().rawQuery(query_str, null);
+        return res;
     }
 }

@@ -12,7 +12,11 @@ import timber.log.Timber;
 public class App extends Application {
     private ApplicationComponent applicationComponent;
 
-    //private TranslationsDatabase translationsDb = new TranslationsDatabase(this.getApplicationContext());
+    public TranslationsDatabase getTranslationsDb() {
+        return translationsDb;
+    }
+
+    private TranslationsDatabase translationsDb;
 
     // Prevent need in a singleton (global) reference to the application object.
     @NonNull
@@ -38,6 +42,8 @@ public class App extends Application {
             DevMetricsProxy devMetricsProxy = applicationComponent.devMetricsProxy();
             devMetricsProxy.apply();
         }
+
+        translationsDb = new TranslationsDatabase(this.getApplicationContext());
     }
 
     @NonNull

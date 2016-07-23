@@ -11,17 +11,19 @@ public class Word implements Serializable{
     private int id;
     private String word;
     private String translate;
-    private Language language;
+    private Language language_word;
+    private Language language_translation;
     private double grade;
 
     public Word() {
     }
 
-    public Word(int id, String word, String translate, Language language, double grade) {
+    public Word(int id, String word, String translate, Language language_word, Language language_translation, double grade) {
         this.id = id;
         this.word = word;
         this.translate = translate;
-        this.language = language;
+        this.language_word = language_word;
+        this.language_translation = language_translation;
         this.grade = grade;
     }
 
@@ -49,12 +51,20 @@ public class Word implements Serializable{
         this.translate = translate;
     }
 
-    public Language getLanguage() {
-        return language;
+    public Language getLanguage_word() {
+        return language_word;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
+    public void setLanguage_word(Language language_word) {
+        this.language_word = language_word;
+    }
+
+    public Language getLanguage_translation() {
+        return language_translation;
+    }
+
+    public void setLanguage_translation(Language language_translation) {
+        this.language_translation = language_translation;
     }
 
     public double getGrade() {

@@ -5,6 +5,23 @@ package ru.yandex.yamblz.rules;
  */
 
 public enum Language {
-    RU,
-    EN
+    RU(1),
+    EN(2);
+
+    public int lang_id;
+
+    Language(int lang_id) {
+        this.lang_id = lang_id;
+    }
+
+    @Override
+    public String toString() {
+        switch (this) {
+            case RU:
+                return "ru";
+            case EN:
+                return "en";
+        }
+        return null;
+    }
 }

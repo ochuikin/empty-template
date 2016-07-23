@@ -27,6 +27,14 @@ public class Word implements Serializable{
         this.grade = grade;
     }
 
+    public Word(String word, Language language) {
+        this.id = 0;
+        this.word = word;
+        this.translate = null;
+        this.language = language;
+        this.grade = 0;
+    }
+
     public int getId() {
         return id;
     }

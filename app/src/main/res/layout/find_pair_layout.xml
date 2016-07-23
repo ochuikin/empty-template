@@ -11,24 +11,33 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/general_button_padding"
             android:background="@color/d2m_transparent"
             android:src="@drawable/ic_clear_black_24dp" />
 
         <SeekBar
+            android:id="@+id/pair_matchin_seek_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:padding="@dimen/general_button_padding"
+            android:layout_weight="1"
+            android:progressDrawable="@drawable/yellow_seekbar"
+            />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/d2m_transparent"
+            android:padding="@dimen/general_button_padding"
             android:src="@drawable/ic_keyboard_tab_black_24dp" />
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/center_text_padding"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:text="@string/make_matching" />
 
     <LinearLayout
@@ -36,27 +45,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/words_list_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"/>
 
-        <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/translations_list_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"/>
+
     </LinearLayout>
 
 </LinearLayout>

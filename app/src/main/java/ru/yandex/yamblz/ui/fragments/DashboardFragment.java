@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.yandex.yamblz.R;
+import ru.yandex.yamblz.rules.FindPairRulesImpl;
 import ru.yandex.yamblz.rules.Language;
 import ru.yandex.yamblz.rules.Word;
 import ru.yandex.yamblz.db.WordFetcher;
@@ -51,7 +52,7 @@ public class DashboardFragment extends BaseFragment {
                 words.add(new Word(6, "6", "qwe6", Language.RU, Language.EN, 0.4));
                 words.add(new Word(7, "7", "qwe7", Language.RU, Language.EN, 0.4));
 
-                applyFragment(FindPairFragment.create(words));
+                applyFragment(FindPairFragment.create(new FindPairRulesImpl(words)));
             }
         });
     }

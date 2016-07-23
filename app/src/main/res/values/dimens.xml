@@ -6,5 +6,8 @@
     <dimen name="left_right_button_padding">32dp</dimen>
     <dimen name="general_padding">16dp</dimen>
     <dimen name="banner_text_top_margin">32dp</dimen>
+    <dimen name="word_item_padding">32dp</dimen>
+    <dimen name="word_item_margin">4dp</dimen>
+    <dimen name="center_text_padding">32dp</dimen>
 
 </resources>

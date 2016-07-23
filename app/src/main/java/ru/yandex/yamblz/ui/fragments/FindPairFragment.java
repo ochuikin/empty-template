@@ -9,11 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SeekBar;
 
 import java.util.List;
 
 import ru.yandex.yamblz.R;
+import ru.yandex.yamblz.rules.FindPairRules;
 import ru.yandex.yamblz.rules.Word;
+import ru.yandex.yamblz.ui.adapters.TranslationsPairMatchingAdapter;
+import ru.yandex.yamblz.ui.adapters.WordsPairMatchingAdapter;
 
 /**
  * Created by olegchuikin on 23/07/16.
@@ -21,10 +25,12 @@ import ru.yandex.yamblz.rules.Word;
 
 public class FindPairFragment extends BaseFragment {
 
-    private List<Word> words;
+    private FindPairRules rules;
 
     private RecyclerView wordsListView;
     private RecyclerView translationListView;
+
+    private SeekBar seekBar;
 
     @NonNull
     @Override
@@ -39,16 +45,24 @@ public class FindPairFragment extends BaseFragment {
         wordsListView = (RecyclerView) findViewById(R.id.words_list_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         wordsListView.setLayoutManager(mLayoutManager);
+        WordsPairMatchingAdapter wordsAdapter = new WordsPairMatchingAdapter(rules.getWords());
+        wordsListView.setAdapter(wordsAdapter);
 
         translationListView = (RecyclerView) findViewById(R.id.translations_list_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         translationListView.setLayoutManager(mLayoutManager);
+        TranslationsPairMatchingAdapter translationAdapter = new TranslationsPairMatchingAdapter(rules.getWords());
+        translationListView.setAdapter(translationAdapter);
 
+        seekBar = (SeekBar) findViewById(R.id.pair_matchin_seek_bar);
+        seekBar.getThumb().mutate().setAlpha(0);
+        seekBar.setEnabled(false);
+        seekBar.setMax(rules.getWords().size());
     }
 
-    public static FindPairFragment create(List<Word> words){
+    public static FindPairFragment create(FindPairRules rules){
         FindPairFragment fragment = new FindPairFragment();
-        fragment.words = words;
+        fragment.rules = rules;
         return fragment;
     }
 

@@ -38,6 +38,7 @@ public class FindPairFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.find_pair_layout, container, false);
+
     }
 
     @Override
@@ -58,7 +59,7 @@ public class FindPairFragment extends BaseFragment {
 
         seekBar = (SeekBar) findViewById(R.id.pair_matchin_seek_bar);
         seekBar.getThumb().mutate().setAlpha(0);
-        seekBar.setEnabled(false);
+//        seekBar.setEnabled(false);
         seekBar.setMax(rules.getWords().size());
     }
 
@@ -99,6 +100,7 @@ public class FindPairFragment extends BaseFragment {
 
                     translationsAdapter.deleteById(translateVh.word.getId());
                     wordsAdapter.deleteById(wordVh.word.getId());
+                    seekBar.setProgress(seekBar.getProgress() + 1);
                 } else {
                     wordVh.mTextView.setBackgroundColor(ContextCompat.getColor(
                             getActivity(), R.color.red_background_button_color));

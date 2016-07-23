@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import ru.yandex.yamblz.db.TranslationsDatabase;
 import ru.yandex.yamblz.developer_settings.DevMetricsProxy;
 import ru.yandex.yamblz.developer_settings.DeveloperSettingsModel;
 import timber.log.Timber;
@@ -11,11 +12,17 @@ import timber.log.Timber;
 public class App extends Application {
     private ApplicationComponent applicationComponent;
 
+    //private TranslationsDatabase translationsDb = new TranslationsDatabase(this.getApplicationContext());
+
     // Prevent need in a singleton (global) reference to the application object.
     @NonNull
     public static App get(@NonNull Context context) {
         return (App) context.getApplicationContext();
     }
+
+//    public TranslationsDatabase getTranslationsDb() {
+//        return translationsDb;
+//    }
 
     @Override
     public void onCreate() {

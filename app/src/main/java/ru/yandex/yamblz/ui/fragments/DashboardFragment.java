@@ -16,6 +16,7 @@ import java.util.List;
 import ru.yandex.yamblz.R;
 import ru.yandex.yamblz.rules.Language;
 import ru.yandex.yamblz.rules.Word;
+import ru.yandex.yamblz.db.WordFetcher;
 
 /**
  * Created by olegchuikin on 23/07/16.
@@ -29,6 +30,7 @@ public class DashboardFragment extends BaseFragment {
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        WordFetcher.loadDataToDatabase(getContext());
         return inflater.inflate(R.layout.dashboard, container, false);
     }
 

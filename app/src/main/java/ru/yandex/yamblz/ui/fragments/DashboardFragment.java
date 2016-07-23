@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class DashboardFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         findPairTrening = (Button) findViewById(R.id.find_pair_menu_item);
+        final FetchWords task = new FetchWords(this);
         findPairTrening.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,21 +71,25 @@ public class DashboardFragment extends BaseFragment {
 //                words.add(new Word(6, "6", "qwe6", Language.RU, Language.EN, 0.4));
 //                words.add(new Word(7, "7", "qwe7", Language.RU, Language.EN, 0.4));
 
-                new FetchWords().execute();
-
+                task.execute();
             }
         });
     }
 
-    private class FetchWords extends AsyncTask<Void, Void, List<Word>> {
+    private static class FetchWords extends AsyncTask<Void, Void, List<Word>> {
+        private WeakReference<DashboardFragment> mRef;
+        public FetchWords(DashboardFragment frag) {
+            mRef = new WeakReference<DashboardFragment>(frag);
+        }
+
         @Override
         protected List<Word> doInBackground(Void... urls) {
-            return WordFetcher.getWords(getContext());
+            return WordFetcher.getWords(mRef.get().getContext());
         }
 
         @Override
         protected void onPostExecute(List<Word> words) {
-            applyFragment(FindPairFragment.create(new FindPairRulesImpl(words)));
+            mRef.get().applyFragment(FindPairFragment.create(new FindPairRulesImpl(words)));
         }
     }
 

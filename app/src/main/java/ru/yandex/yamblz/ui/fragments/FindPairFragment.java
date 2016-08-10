@@ -46,6 +46,7 @@ public class FindPairFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         wordsListView = (RecyclerView) findViewById(R.id.words_list_view);
+        // mNo!
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         wordsListView.setLayoutManager(mLayoutManager);
         wordsAdapter = new WordsPairMatchingAdapter(rules.getWords(), this);
@@ -65,6 +66,8 @@ public class FindPairFragment extends BaseFragment {
 
     public static FindPairFragment create(FindPairRules rules) {
         FindPairFragment fragment = new FindPairFragment();
+        // При пересоздании фрагмента система ничего не будет знать о значении переменной
+        // Используйте (set/get)Arguments
         fragment.rules = rules;
         return fragment;
     }
@@ -107,6 +110,7 @@ public class FindPairFragment extends BaseFragment {
                     translateVh.mTextView.setBackgroundColor(ContextCompat.getColor(
                             getActivity(), R.color.red_background_button_color));
 
+                    // Да, жестко :)
                     new Thread(new Runnable() {
                         @Override
                         public void run() {

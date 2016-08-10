@@ -18,6 +18,8 @@ import timber.log.Timber;
 public class App extends Application {
     private ApplicationComponent applicationComponent;
 
+    // Подобные зависимости лучше в даггер выносить. Он для того и нужен - выделяет зависимости, выносит их инстанциацию,
+    // упрощает inject'инг.
     public TranslationsDatabase getTranslationsDb() {
         return translationsDb;
     }

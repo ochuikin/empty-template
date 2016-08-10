@@ -23,6 +23,7 @@ import ru.yandex.yamblz.ui.fragments.FindPairFragment;
 public abstract class PairMatchingBaseAdapter extends RecyclerView.Adapter<PairMatchingBaseAdapter.ViewHolder> {
 
     protected List<Word> words;
+    // Здесь точно не должен быть фрагмент. Здесь должен быть интерфейс, предоставляющий только необходимый минимум
     protected FindPairFragment fragment;
 
     public PairMatchingBaseAdapter(List<Word> words, FindPairFragment fragment) {

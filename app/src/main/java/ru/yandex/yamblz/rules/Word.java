@@ -6,11 +6,15 @@ import java.io.Serializable;
  * Created by olegchuikin on 23/07/16.
  */
 
+// Предпочитайте immutable объекты. Если конструирование объекта сложное или разнесено, то определите Builder.
+// Имутабельность сделает код намного проще для понимания и поддержки, но имеет и очевидные недостатки.
+// Данная модель мутабельна только потому, что конструирование разнесено, как я вижу - отличный кандидат на immutability + Builder.
 public class Word implements Serializable{
 
     private int id;
     private String word;
     private String translate;
+    // В Java переменные в snake_case не пишут
     private Language language_word;
     private Language language_translation;
     private double grade;
